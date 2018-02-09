@@ -1,5 +1,5 @@
 ### Welcome to SecureMe-WinSec!
-Luke Dinkler started this project as a part of the CyberPatriot (Cyber Defense) Competition of which I was a part, and it evolved into an idea: We live in a world where a _lot_ of people have computer problems. One big reason for this is that most people don't know how to properly manage and protect their computers. That is why I developed this piece of software. I want to give everyone an easy way to manage and secure their desktop or laptop PCs.
+Luke Dinkler started this project as a part of the CyberPatriot (Cyber Defense) Competition of which I was a part, and it evolved into an idea: We live in a world where a _lot_ of people have computer problems. One big reason for this is that most people don't know how to properly manage and protect their computers. That is why we developed this piece of software. We want to give everyone an easy way to manage and secure their desktop or laptop PCs.
 
 ### It's Geared towards Grandpa.
 We all know that person who can't use a computer to save their life. Well, the clean, easy-to-navigate UI of SecureMe should allow and empower even them to keep their computer in check.
