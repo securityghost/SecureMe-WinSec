@@ -1,4 +1,4 @@
-### Welcome to SecureMe!
+### Welcome to SecureMe-WinSec!
 Luke Dinkler started this project as a part of the CyberPatriot (Cyber Defense) Competition of which I was a part, and it evolved into an idea: We live in a world where a _lot_ of people have computer problems. One big reason for this is that most people don't know how to properly manage and protect their computers. That is why I developed this piece of software. I want to give everyone an easy way to manage and secure their desktop or laptop PCs.
 
 ### It's Geared towards Grandpa.
