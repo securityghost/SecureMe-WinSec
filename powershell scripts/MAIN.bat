@@ -1,8 +1,9 @@
-Title  Windows PowerShell Security Script
-color 8A
+```batch
 @echo off
+color 8A
 
 :StartupScreen
+cls
 echo ####################################################
 echo #        PowerShell Basic Security Script          #
 echo #                 Version 2.1                      #
@@ -11,95 +12,80 @@ echo #                                                  #
 echo #            ~Coded by SecurityGhost~              #
 echo ####################################################
 timeout /t 3 > NUL
- 
-cls
 
-net sessions >NUL
-if %errorlevel%==0 (
-goto :Home
-) else (
-echo You need to run this script as a Administrator!
-pause
-exit
+net sessions > NUL
+if %errorlevel% neq 0 (
+    echo You need to run this script as an Administrator!
+    pause
+    exit
 )
 
-cls
-
 :Home
-echo  There are curenly 5 sections of this script:
+cls
+echo  There are currently 5 sections of this script:
 echo -----------------------------------------------------
 echo 1 - Information Gathering
 echo 2 - User Management
-echo 3 - Security Configureations
+echo 3 - Security Configurations
 echo 4 - Service Management 
 echo 5 - System Patching 
 echo -----------------------------------------------------
-echo.
 echo 6 - Reboot
 echo 7 - Exit 
 echo.  
 set /p Choice=Type choice:
-if "%Choice%"=="1" goto Info
-if "%Choice%"=="2" goto Users
-if "%Choice%"=="3" goto Security
-if "%Choice%"=="4" goto Service
-if "%Choice%"=="5" goto Update
-if "%Choice%"=="6" goto Reboot
-if "%Choice%"=="7" exit
-goto Home
 
+if "%Choice%"=="1" goto :Info
+if "%Choice%"=="2" goto :Users
+if "%Choice%"=="3" goto :Security
+if "%Choice%"=="4" goto :Service
+if "%Choice%"=="5" goto :Update
+if "%Choice%"=="6" goto :Reboot
+if "%Choice%"=="7" exit
+
+goto :Home
+
+:ExecutePowerShell
+PowerShell -NoProfile -Command "& {Start-Process -Wait PowerShell.exe -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File ""%~dp0\%1""' -Verb RunAs}"
+goto :Home
 
 :Info
 cls
-echo launching Information Gathering section....
+echo Launching Information Gathering section...
 timeout /t 2
-PowerShell -NoProfile -Command "& {Start-Process -Wait PowerShell.exe -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File ""%~dp0\reports.ps1""' -Verb RunAs}"
-cls
-goto Home
+call :ExecutePowerShell reports.ps1
 
 :Users
 cls
-echo launching User Management section....
+echo Launching User Management section...
 timeout /t 2
-PowerShell -NoProfile -Command "& {Start-Process -Wait PowerShell.exe -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File ""%~dp0\manageusers.ps1""' -Verb RunAs}"
-cls
-goto Home
+call :ExecutePowerShell manageusers.ps1
 
 :Security
 cls
-echo launching Security Polices section....
+echo Launching Security Policies section...
 timeout /t 2
-PowerShell -NoProfile -Command "& {Start-Process -Wait PowerShell.exe -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File ""%~dp0\security.ps1""' -Verb RunAs}"
-cls
-goto Home
+call :ExecutePowerShell security.ps1
 
 :Service
 cls
-echo launching Services section....
+echo Launching Services section...
 timeout /t 2
-PowerShell -NoProfile -Command "& {Start-Process -Wait PowerShell.exe -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File ""%~dp0\services.ps1""' -Verb RunAs}"
-cls
-goto Home
+call :ExecutePowerShell services.ps1
 
 :Update
 cls
-echo launching Update section....
+echo Launching Update section...
 timeout /t 2
-PowerShell -NoProfile -Command "& {Start-Process PowerShell.exe -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File ""%~dp0\Updates.ps1""' -Verb RunAs}"
-cls
-goto Home
+call :ExecutePowerShell updates.ps1
 
 :Reboot
 cls
-Color 0C 
-echo Reboot in 5
-timeout /t 1 > NUL
-echo 4
-timeout /t 1 > NUL
-echo 3
-timeout /t 1 > NUL
-echo 2
-timeout /t 1 > NUL
-echo 1! Rebooting Now...
-timeout /t 1 > NUL
+color 0C 
+echo Rebooting in 5...
+for /l %%i in (5,-1,1) do (
+    echo %%i
+    timeout /t 1 > NUL
+)
 shutdown /r /f /t 00
+```
